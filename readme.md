@@ -7,7 +7,7 @@ var permissionsMissingTestContext = new TestContext
 {
     Users = GetStandardUsers().ApplyForEach(x => x.Permissions = new[0]),
     SecurityPolicy = GetStandardSecurityPolicy().Apply(x => x.ShowWarningWhenPermissionsMissing = true),
-    AnonymousPageUrl = GetStandardConfig().Map(x => new Url(x.PermissionsMissingScreenUrl))
+    AnonymousPageUrl = GetStandardConfig().Map(x => new Url(x.PermissionsMissingScreenUrl)),
     Timeout = GetTestTimeout()?.Map(x => TimeSpan.FromSeconds(x)) ?? TimeSpan.FromSeconds(30)
 }
 ```
