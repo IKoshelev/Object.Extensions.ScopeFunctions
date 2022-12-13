@@ -5,7 +5,7 @@ Functions `Apply`, `ApplyForEach` and `Map` allow you to have side-effects or ma
 ```csharp
 var permissionsMissingTestContext = new TestContext
 {
-    Users = GetStandardUsers().ApplyForEach(x => x.Permissions = new[0]),
+    Users = GetStandardUsers().ApplyForEach(x => x.Permissions = new Permission[0]),
     SecurityPolicy = GetStandardSecurityPolicy().Apply(x => x.ShowWarningWhenPermissionsMissing = true),
     AnonymousPageUrl = GetStandardConfig().Map(x => new Url(x.PermissionsMissingScreenUrl)),
     Timeout = GetTestTimeout()?.Map(x => TimeSpan.FromSeconds(x)) ?? TimeSpan.FromSeconds(30)

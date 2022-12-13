@@ -8,18 +8,24 @@
 
    <PropertyGroup>
     <PackageId>Object.Extensions.ScopeFunction</PackageId>
-    <Version>1.0.0</Version>
+    <Version>1.0.1</Version>
     <PackageTags>Scope function extensions; Apply; ApplyForEach; object Apply; pipe-forward; |></PackageTags>
     <Authors>Ivan Koshelev</Authors>
     <ProjectUrl>https://github.com/IKoshelev/Object.Extensions.ScopeFunctions</ProjectUrl>
     <Description>
-      Scope functions Apply, ApplyForEach and Map. The apply passed functions to a given object and 
-      return that original object or function return, allowing you to have seamless side-effects 
+      Scope functions Apply, ApplyForEach and Map. They apply passed functions to a given object and 
+      return that original object (or function return for Map), allowing you to have seamless side-effects 
       and manipulate objects in fluent invocation chains or object iniatlizers, i.e. GetConfig().Apply(changes).Build() 
     </Description>
     <IncludeSource>True</IncludeSource>
     <IncludeSymbols>True</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <License>MIT</License>
+    <PackageReadmeFile>readme.md</PackageReadmeFile>
   </PropertyGroup>
+
+<ItemGroup>
+    <None Include="readme.md" Pack="true" PackagePath="\"/>
+</ItemGroup>
 
 </Project>
