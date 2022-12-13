@@ -1,7 +1,7 @@
 ## Scope functions
 
 Functions `Apply`, `ApplyForEach` and `Map` allow you to have side-effects or manipulate objects in fluent invocation chains or object initializers.
-
+ 
 ```csharp
 var permissionsMissingTestContext = new TestContext
 {
