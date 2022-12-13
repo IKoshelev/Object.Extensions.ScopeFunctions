@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.0</TargetFramework>
+    <RootNamespace>Object.Extensions.ScopeFunction</RootNamespace>
+  </PropertyGroup>
+
+   <PropertyGroup>
+    <PackageId>Azure.Storage.Blobs</PackageId>
+    <Version>12.4.0</Version>
+    <PackageTags>Microsoft Azure Storage Blobs;Microsoft;Azure;Blobs;Blob;Storage;StorageScalable</PackageTags>
+    <Description>
+     
+    </Description>
+  </PropertyGroup>
+
+</Project>
