@@ -42,6 +42,7 @@ jobs:
       
     - name: Publish
       if: startsWith(github.ref, 'refs/heads/release')
+      # push of nupkg automatically includes snupkg if it's in the same folder
       run: |
         nuget push **\*.nupkg -Source 'https://api.nuget.org/v3/index.json' -ApiKey ${{secrets.NUGET_API_KEY}}
-        nuget push **\*.snupkg -Source 'https://api.nuget.org/v3/index.json' -ApiKey ${{secrets.NUGET_API_KEY}}
+        
