@@ -8,7 +8,7 @@
 
    <PropertyGroup>
     <PackageId>Object.Extensions.ScopeFunction</PackageId>
-    <Version>1.0.2</Version>
+    <Version>1.0.3</Version>
     <PackageTags>Scope function extensions; Apply; ApplyForEach; object Apply; pipe-forward; |></PackageTags>
     <Authors>Ivan Koshelev</Authors>
     <ProjectUrl>https://github.com/IKoshelev/Object.Extensions.ScopeFunctions</ProjectUrl>

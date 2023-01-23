@@ -17,17 +17,32 @@ namespace Object.Extensions.ScopeFunction
         }
 
         /// <summary>
-        /// Applies function to each item in IEnumerable and returns original IEnumerable
+        /// Applies function to each item in ICollection and returns original ICollection
+        /// If you are working with IEnumerable - use ApplyForEachLazy
         /// </summary>
-        public static IEnumerable<T> ApplyForEach<T>(
-            this IEnumerable<T> target,
-            Action<T> fn)
+        public static TCollection ApplyForEach<TCollection, T>(
+            this TCollection target,
+            Action<T> fn) where TCollection: ICollection<T>
         {
             foreach (var item in target)
             {
                 fn(item);
             }
             return target;
+        }
+
+        /// <summary>
+        /// Applies function to each item in IEnumerable and yields the items
+        /// </summary>
+        public static IEnumerable<T> ApplyForEachLazy<T>(
+            this IEnumerable<T> target,
+            Action<T> fn)
+        {
+            foreach (var item in target)
+            {
+                fn(item);
+                yield return item;
+            }
         }
 
         /// <summary>
