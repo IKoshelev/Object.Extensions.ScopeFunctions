@@ -1,14 +1,14 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard1.0</TargetFramework>
+    <TargetFrameworks>netstandard1.0;netstandard2.0;net45</TargetFrameworks>
     <RootNamespace>Object.Extensions.ScopeFunction</RootNamespace>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
    <PropertyGroup>
     <PackageId>Object.Extensions.ScopeFunction</PackageId>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
     <PackageTags>Scope function extensions; Apply; ApplyForEach; object Apply; pipe-forward; |></PackageTags>
     <Authors>Ivan Koshelev</Authors>
     <ProjectUrl>https://github.com/IKoshelev/Object.Extensions.ScopeFunctions</ProjectUrl>
