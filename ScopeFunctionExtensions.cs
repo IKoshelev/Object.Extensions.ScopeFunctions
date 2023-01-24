@@ -18,9 +18,9 @@ namespace Object.Extensions.ScopeFunction
 
         /// <summary>
         /// Applies function to each item in ICollection and returns original ICollection
-        /// If you are working with IEnumerable - use ApplyForEachLazy
+        /// If you are working with IEnumerable - use ApplyForEach
         /// </summary>
-        public static TCollection ApplyForEach<TCollection, T>(
+        public static TCollection ApplyForEachEager<TCollection, T>(
             this TCollection target,
             Action<T> fn) where TCollection: ICollection<T>
         {
@@ -34,7 +34,7 @@ namespace Object.Extensions.ScopeFunction
         /// <summary>
         /// Applies function to each item in IEnumerable and yields the items
         /// </summary>
-        public static IEnumerable<T> ApplyForEachLazy<T>(
+        public static IEnumerable<T> ApplyForEach<T>(
             this IEnumerable<T> target,
             Action<T> fn)
         {
