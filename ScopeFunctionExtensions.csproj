@@ -1,15 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard1.0;netstandard2.0;</TargetFrameworks>
+    <TargetFrameworks>netstandard1.0;netstandard2.0;netstandard2.1</TargetFrameworks>
     <RootNamespace>Object.Extensions.ScopeFunction</RootNamespace>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
    <PropertyGroup>
     <PackageId>Object.Extensions.ScopeFunction</PackageId>
-    <Version>1.0.6</Version>
-    <PackageTags>Scope function extensions; Apply; ApplyForEach; object Apply; Map; pipe-forward; |></PackageTags>
+    <Version>1.0.8</Version>
+    <PackageTags>Scope function extensions; Apply; ApplyForEach; object Apply; Map; pipe-forward; |&gt;</PackageTags>
     <Authors>Ivan Koshelev</Authors>
     <ProjectUrl>https://github.com/IKoshelev/Object.Extensions.ScopeFunctions</ProjectUrl>
     <Description>
@@ -23,7 +23,7 @@
   </PropertyGroup>
 
 <ItemGroup>
-    <None Include="readme.md" Pack="true" PackagePath="\"/>
+    <None Include="readme.md" Pack="true" PackagePath="\" />
 </ItemGroup>
 
 </Project>

@@ -19,6 +19,17 @@ namespace Object.Extensions.ScopeFunction
         }
 
         /// <summary>
+        /// Applies function to a given object and returns original object
+        /// </summary>
+        public static async Task<T> ApplyAsync<T>(
+            this T target,
+            Func<T, Task> fn)
+        {
+            await fn(target);
+            return target;
+        }
+
+        /// <summary>
         /// Applies function to each item in ICollection and returns original ICollection
         /// If you are working with IEnumerable - use ApplyForEach
         /// </summary>
@@ -29,6 +40,22 @@ namespace Object.Extensions.ScopeFunction
             foreach (var item in target)
             {
                 fn(item);
+            }
+            return target;
+        }
+
+
+        /// <summary>
+        /// Applies function to each item in ICollection and returns original ICollection
+        /// If you are working with IEnumerable - use ApplyForEach
+        /// </summary>
+        public static async Task<TCollection> ApplyForEachEagerAsync<TCollection, T>(
+            this TCollection target,
+            Func<T, Task> fn) where TCollection : ICollection<T>
+        {
+            foreach (var item in target)
+            {
+                await fn(item);
             }
             return target;
         }
@@ -46,6 +73,44 @@ namespace Object.Extensions.ScopeFunction
                 yield return item;
             }
         }
+
+#if NETSTANDARD2_1_OR_GREATER
+        /// <summary>
+        /// Applies function to each item in IEnumerable and yields the items
+        /// </summary>
+        public static async IAsyncEnumerable<T> ApplyForEachAsync<T>(
+            this IAsyncEnumerable<T> target,
+            Func<T, Task> fn)
+        {
+            await foreach (var item in target)
+            {
+                await fn(item);
+                yield return item;
+            }
+        }
+
+        /// <summary>
+        /// Applies function to each item in IEnumerable and yields the items
+        /// </summary>
+        public static async IAsyncEnumerable<T> ApplyForEachAsync<T>(
+            this IEnumerable<T> target,
+            Func<T, Task> fn)
+        {
+            foreach (var item in target)
+            {
+                await fn(item);
+                yield return item;
+            }
+        }
+#endif
+
+        //public static async void test()
+        //{
+        //    #if NETSTANDARD2_1_OR_GREATER
+        //    IAsyncEnumerable<int> a = null;
+        //    await a.ApplyForEachAsync(async x => {});
+        //    #endif
+        //}
 
         /// <summary>
         /// Applies function to a given object and returns that functions return.
