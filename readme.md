@@ -1,6 +1,6 @@
 ## Scope functions
 
-Functions `Map`, `Apply`, `ApplyForEach`, `ApplyForEachEager` allow you to have side-effects or manipulate objects in fluent invocation chains or object initializers.
+Functions `Map`, `Apply`, `ApplyForEach`, `ApplyForEachEager`, `WrapException` allow you to have side-effects or manipulate objects in fluent invocation chains or object initializers.
  
 For example: 
 
@@ -11,7 +11,12 @@ Department department = new Department
     // before, you would have to do something like
     // ManagerTitle = user == null ? null : GetUserTitle(user)
     ManagerTitle = manager?.Map(GetUserTitle)
-    //...
+    Budget = await 
+        repo.WrapExceptionAsync(
+            r => r.GetBudgets(budgetCode).Where(x => x.Year == DateTime.Now.Year).SingleAsync(),
+            (_, ex) => throw new DepartmentCreationException($"Could not determine budget for code {budgetCode}", ex))
+        .ContinueWith(budgetTask => budgetTask.Result.Apply(ValidateBudget))
+    // ....
 }
 ```
 

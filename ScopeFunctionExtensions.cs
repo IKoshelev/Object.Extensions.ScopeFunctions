@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Object.Extensions.ScopeFunction
 {
@@ -46,14 +48,90 @@ namespace Object.Extensions.ScopeFunction
         }
 
         /// <summary>
-        /// Applies function to a given object and returns that functions returns that function return.
+        /// Applies function to a given object and returns that functions return.
         /// Analog of |> (pipe-forward) operator in F#.
+        /// <example>
+        /// <code>
+        /// <para/> int? userId = 5;
+        /// <para/> var user = userId?.Map(i => cache[i]);
+        /// </code>
+        /// </example>
         /// </summary>
         public static TResp Map<TTarget, TResp>(
             this TTarget target, 
             Func<TTarget, TResp> fn)
         {
             return fn(target);
+        }
+
+        /// <summary>
+        /// Applies function to a given object and returns that functions return.
+        /// Analog of |> (pipe-forward) operator in F#.
+        /// <example>
+        /// <code>
+        /// <para/> int? userId = 5;
+        /// <para/> var user = await userId?.Map(i => userRepo.GetUser(i));
+        /// </code>
+        /// </example>
+        /// </summary>
+        public static async Task<TResp> MapAsync<TTarget, TResp>(
+            this TTarget target,
+            Func<TTarget, Task<TResp>> fn)
+        {
+            return await fn(target);
+        }
+
+        /// <summary>
+        /// Applies function to a given object and returns that functions return.
+        /// If an exception is thrown - calls onException where you can either recover
+        /// by returtning a default TTarget or provide better exception by throwing a different exception.
+        /// <example>
+        /// <code>
+        /// <para/> ruleCache.WrapException(c => c.getActiveRuleset(userId),
+        /// <para/>                        (c,ex) => config.defaultRuleset ?? throw new RulesetNotAvailableException(userId, ex))
+        /// <para/>          .Where(rule => .....)
+        /// </code>
+        /// </example>
+        /// </summary>
+        public static TResp WrapException<TTarget, TResp>(
+            this TTarget target,
+            Func<TTarget, TResp> fn,
+            Func<TTarget, Exception, TResp> onException)
+        {
+            try
+            {
+                return fn(target);
+            }
+            catch (Exception ex)
+            {
+                return onException(target, ex);
+            }
+        }
+
+        /// <summary>
+        /// Applies function to a given object and returns that functions return.
+        /// If an exception is thrown - calls onException where you can either recover
+        /// by returtning a default TTarget or provide better exception by throwing a different exception.
+        /// <example>
+        /// <code>
+        /// <para/> await ruleRepository.WrapException(r => r.getActiveRuleset(userId),
+        /// <para/>                                   async (r,ex) => await r.GetDefaultRuleSet() ?? throw new RulesetNotAvailableException(userId, ex))          
+        /// </code>
+        /// </example>
+        /// </summary>
+        public static async Task<TResp> WrapExceptionAsync<TTarget, TResp>(
+            this TTarget target,
+            Func<TTarget, Task<TResp>> fn,
+            Func<TTarget, Exception, Task<TResp>> onException)
+        {
+            try
+            {
+                return await fn(target);
+            }
+            catch (Exception ex)
+            {
+                return await onException(target, ex);
+            }
         }
     }
 }
